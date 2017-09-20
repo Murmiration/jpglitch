@@ -101,7 +101,10 @@ class Jpeg(object):
             try:
                 stream = io.BytesIO(self.new_bytes)
                 im = Image.open(stream)
-                im.save(name)
+                if name.endswith('.png'):
+                    im.save(name)
+                else:
+                    im.save(name, format='JPEG')
                 return
             except IOError:
                 if self.parameters['iterations'] == 1:
